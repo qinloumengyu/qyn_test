@@ -5,7 +5,7 @@
     <link href="/static/libs/jqueryui/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet"/>
     <link href="/static/libs2/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="/static/libs/bootstrap-multiselect-master/css/bootstrap-multiselect.css" rel="stylesheet"/>
-    <link href="/static/libs/bootstrap-daterangepicker-master/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="/static/libs2/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
      <style>
         .ui-datepicker-calendar {
             display: none;
@@ -52,7 +52,12 @@
                 <label class="col-sm-2 control-label">时间段</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="tydate" class="form-control" value="{{ cc.tydate|date:"SHORT_DATE_FORMAT" }}">
+                    <div class='input-group date form_date' >
+                    <input type="text" name="tydate" class="form-control" readonly="readonly"">
+                    <span class="input-group-addon input-sm">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -76,8 +81,8 @@
     <script src="/static/libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="/static/libs/bootstrap-multiselect-master/js/bootstrap-multiselect.js"></script>
     <script src="/static/mine/libs2/Mine-uidatepickerlocale.js"></script>
-    <script type="text/javascript" src="/static/libs/bootstrap-daterangepicker-master/moment.js"></script>
-    <script type="text/javascript" src="/static/libs/bootstrap-daterangepicker-master/daterangepicker.js"></script>
+    <script type="text/javascript" src="/static/libs2/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/libs2/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
     <script type="text/javascript">
         $(function () {
             $('select[name="steps"]').multiselect({
@@ -85,14 +90,14 @@
                 filterBehavior: 'text',
                 nonSelectedText: '全选'
             });
-            $('input[name="tydate"]').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'MM yy',
-                onClose: function(dateText, inst){
-                    $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-                }
+            $('input[name="tydate"]').datetimepicker({
+                format: 'yyyy-mm',  
+                weekStart: 1,  
+                autoclose: true,  
+                startView: 3,  
+                minView: 3,  
+                forceParse: false,  
+                language: 'zh-CN'
             });
         })
     </script>
